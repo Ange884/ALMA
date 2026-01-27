@@ -2,10 +2,17 @@ import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 import LandingScreen from "../../Pages/Landing.jsx";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+const Stack = createNativeStackNavigator();
+import GetStartedScreen from "../../Pages/GetStarted.jsx";
 
 export default function HomeScreen() {
   return (
-    <LandingScreen />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Landing" component={LandingScreen} />
+        <Stack.Screen name="getStarted" component={GetStartedScreen} />
+      </Stack.Navigator>
   );
 }
 

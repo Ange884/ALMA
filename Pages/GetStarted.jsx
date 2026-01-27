@@ -6,23 +6,32 @@ import {
   ImageBackground,
   TextInput,
   TouchableOpacity,
-  SafeAreaView
+  SafeAreaView,
+  Dimensions
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useFonts, Poppins_400Regular, Poppins_700Bold,Poppins_600SemiBold } from "@expo-google-fonts/poppins";
+ const {height,width} = Dimensions.get('window');
 
 export default function GetStartedScreen() {
+     const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_700Bold,
+    Poppins_600SemiBold
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
 
       {/* Top Image Section */}
       <ImageBackground
-        source={require("./assets/bg.jpg")}
+        source={require("../assets/images/signup.jpg")}
         style={styles.imageSection}
       >
-        <View style={styles.logoCircle}>
-          <Ionicons name="leaf" size={40} color="#2f6f4e" />
-        </View>
-      </ImageBackground>
 
       {/* White Card */}
       <View style={styles.card}>
@@ -67,6 +76,108 @@ export default function GetStartedScreen() {
         </Text>
 
       </View>
+       </ImageBackground>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+
+  imageSection: {
+    height: height,
+    width: width,
+    flex: 1,
+    justifyContent: "flex-end"
+  },
+
+  card: {
+    backgroundColor: "#fff",
+    padding: 25,
+    height: height * 0.6,
+  },
+
+  title: {
+    fontSize: 30,
+    fontWeight: "bold",
+    fontFamily: 'Poppins_700Bold',
+    textAlign: "center"
+  },
+
+  subtitle: {
+    color:"#03846CB2",
+    marginBottom: 20,
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center"
+  },
+
+  inputBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 15,
+    borderColor: "#191818",
+    borderWidth: 1
+  },
+
+  input: {
+    flex: 1,
+    marginLeft: 10,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 16,
+  },
+
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20
+  },
+
+  remember: {
+    color: "#555",
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 17,
+  },
+
+  forgot: {
+    color: "#2f6f4e",
+    fontWeight: "600",
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 17,
+  },
+
+  button: {
+    backgroundColor: "#0f2e23",
+    padding: 15,
+    borderRadius: 30,
+    alignItems: "center"
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+    fontFamily: 'Poppins_700Bold',
+  },
+
+  signup: {
+    textAlign: "center",
+    marginTop: 15,
+    color: "#333",
+    fontFamily:"Poppins_400Regular",
+    fontSize: 18,
+  },
+
+  signupLink: {
+    color: "#2f6f4e",
+    fontWeight: "bold",
+    fontSize: 18,
+  }
+});
