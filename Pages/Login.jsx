@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFonts, Poppins_400Regular, Poppins_700Bold,Poppins_600SemiBold } from "@expo-google-fonts/poppins";
  const {height,width} = Dimensions.get('window');
 
-export default function GetStartedScreen() {
+export default function GetStartedScreen({navigation}) {
      const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -66,13 +66,15 @@ export default function GetStartedScreen() {
         </View>
 
         {/* Button */}
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+           onPress={()=>navigation.navigate("settings")}
+          >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         {/* Signup */}
         <Text style={styles.signup}>
-          Not having an account? <Text style={styles.signupLink}>Sign Up</Text>
+          Not having an account? <Text style={styles.signupLink} onPress={()=>navigation.navigate("signUp")}>Sign Up</Text>
         </Text>
 
       </View>
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 25,
     height: height * 0.6,
+    
   },
 
   title: {

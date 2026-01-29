@@ -5,13 +5,17 @@ import LandingScreen from "../../Pages/Landing.jsx";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
-import GetStartedScreen from "../../Pages/GetStarted.jsx";
+import GetStartedScreen from "../../Pages/Login.jsx";
+import SignUpScreen from "../../Pages/sign-up.jsx";
+import SettingsScreen from '../../Pages/Settings.jsx';
 
 export default function HomeScreen() {
   return (
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Landing" component={LandingScreen} />
         <Stack.Screen name="getStarted" component={GetStartedScreen} />
+        <Stack.Screen name="signUp" component={SignUpScreen} />
+        <Stack.Screen name="settings" component={SettingsScreen} />
       </Stack.Navigator>
   );
 }
