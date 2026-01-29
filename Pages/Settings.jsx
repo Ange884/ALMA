@@ -1,22 +1,31 @@
+import {
+  Poppins_400Regular,
+  Poppins_600SemiBold,
+  Poppins_700Bold,
+  useFonts,
+} from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
   Image,
+  SafeAreaView,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import {
-  useFonts,
-  Poppins_400Regular,
-  Poppins_700Bold,
-  Poppins_600SemiBold,
-} from "@expo-google-fonts/poppins";
-import TabLayout from "./Navbar.jsx";
+import { BottomNavBar } from "./Navbar.jsx";
 
-export default function SettingsScreen() {
+
+export default function SettingsScreen({navigation}) {
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => setIsEnabled(previous => !previous);
+
+ const [darkMode, setDarkMode] = React.useState(false);
+const [notifications, setNotifications] = React.useState(false);
+
+
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -26,73 +35,92 @@ export default function SettingsScreen() {
   if (!fontsLoaded) return null;
 
   const settings = [
-    { icon: "notifications-outline", title: "Notifications", action: "chevron-forward" },
-    { icon: "moon-outline", title: "Dark Mode", action: "toggle" },
-    { icon: "globe-outline", title: "Language", action: "chevron-down" },
-    { icon: "information-circle-outline", title: "About", action: "chevron-forward" },
-    { icon: "help-circle-outline", title: "Help & Support", action: "chevron-forward" },
-  ];
+  { icon: "notifications-outline", title: "Notifications", type: "toggle", key: "notifications" },
+  { icon: "moon-outline", title: "Dark Mode", type: "toggle", key: "darkMode" },
+  { icon: "globe-outline", title: "Language", type: "nav", action: "chevron-down" },
+  { icon: "information-circle-outline", title: "About", type: "nav", action: "chevron-forward" },
+  { icon: "help-circle-outline", title: "Help & Support", type: "nav", action: "chevron-forward" },
+];
+
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Ionicons name="chevron-back" size={24} />
-        <Text style={styles.title}>Settings</Text>
-        <View style={{ width: 24 }} />
-      </View>
-
-      {/* Profile */}
-      <View style={styles.profileCard}>
-        <View style={styles.avatar}>
-          <Ionicons name="person" size={28} color="#fff" />
+      {/* Content with padding */}
+      <View style={styles.content}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Ionicons name="chevron-back" size={24} />
+          <Image source={require("../assets/images/alma.png")} style={styles.smallImage} />
+          <Text style={styles.title}>Settings</Text>
+          <View style={{ width: 24 }} />
         </View>
-        <View style={styles.profileInfo}>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.edit}>Edit Profile</Text>
+
+        {/* Profile */}
+        <View style={styles.profileCard}>
+          <View style={styles.avatar}>
+            <Ionicons name="person" size={28} color="#fff" />
+          </View>
+          <View style={styles.profileInfo}>
+            <Text style={styles.name}>John Doe</Text>
+            <Text style={styles.edit}
+                onPress={()=>navigation.navigate("profile")}>Edit Profile</Text>
+          </View>
+        </View>
+
+        {/* Section */}
+        <Text style={styles.section}>App Settings</Text>
+
+        {/* Settings List */}
+        <View style={styles.card}>
+          {settings.map((item, index) => (
+            <TouchableOpacity key={index} style={styles.row}>
+              <Ionicons name={item.icon} size={22} color="#222" />
+              <Text style={styles.rowText}>{item.title}</Text>
+
+              {item.type === "toggle" ? (
+                <Switch
+                  value={item.key === "darkMode" ? darkMode : notifications}
+                  onValueChange={
+                    item.key === "darkMode" ? setDarkMode : setNotifications
+                  }
+                  trackColor={{ false: "#fff", true: "#041411" }}
+                  thumbColor="#041411"
+                />
+              ) : (
+                <Ionicons name={item.action} size={18} color="#999" />
+              )}
+            </TouchableOpacity>
+          ))}
         </View>
       </View>
 
-      {/* Section */}
-      <Text style={styles.section}>App Settings</Text>
-
-      {/* Settings List */}
-      <View style={styles.card}>
-        {settings.map((item, index) => (
-          <TouchableOpacity key={index} style={styles.row}>
-            <Ionicons name={item.icon} size={22} color="#4A6CF7" />
-            <Text style={styles.rowText}>{item.title}</Text>
-
-            {item.action === "toggle" ? (
-              <View style={styles.toggle} />
-            ) : (
-              <Ionicons name={item.action} size={18} color="#999" />
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Bottom Nav */}
-      <TabLayout />
+      {/* Bottom Nav - Full width */}
+      <BottomNavBar activeTab="settings" />
     </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F7F8FA",
-    paddingHorizontal: 20,
+    backgroundColor: '#fff', // Or your background color
+  },
+
+  content: {
+    flex: 1,
+    paddingHorizontal: 15,
+    paddingTop: 40,
+    paddingBottom: 90, // Space for bottom nav bar
   },
 
   header: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     marginVertical: 20,
+    gap:40,
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 21,
     fontFamily: "Poppins_700Bold",
   },
 
@@ -109,7 +137,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: "#4A6CF7",
+    backgroundColor: "#023129",
     justifyContent: "center",
     alignItems: "center",
     marginRight: 12,
@@ -119,29 +147,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  smallImage: {
+  width: 40,
+  height: 40,
+  resizeMode: "contain",
+},
+
+
   name: {
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: "Poppins_600SemiBold",
   },
 
   edit: {
-    fontSize: 12,
-    color: "#4A6CF7",
+    fontSize: 14,
+    color: "#026251",
     marginTop: 2,
     fontFamily: "Poppins_400Regular",
   },
 
   section: {
-    fontSize: 14,
+    fontSize: 18,
     fontFamily: "Poppins_600SemiBold",
     marginBottom: 10,
     color: "#444",
-  },
-
-  card: {
-    backgroundColor: "#fff",
-    borderRadius: 16,
-    paddingVertical: 5,
   },
 
   row: {
@@ -149,12 +178,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 14,
     paddingHorizontal: 16,
+    borderWidth:1,
+    borderColor:'#EEE',
+    marginBottom:5,
+    backgroundColor:"#03846C4D",
+    borderRadius:14,
   },
 
   rowText: {
     flex: 1,
     marginLeft: 12,
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "Poppins_400Regular",
   },
 

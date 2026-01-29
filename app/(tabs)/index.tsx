@@ -8,6 +8,7 @@ const Stack = createNativeStackNavigator();
 import GetStartedScreen from "../../Pages/Login.jsx";
 import SignUpScreen from "../../Pages/sign-up.jsx";
 import SettingsScreen from '../../Pages/Settings.jsx';
+import ProfileEditScreen from "../../Pages/Profile.jsx";
 
 export default function HomeScreen() {
   return (
@@ -16,6 +17,7 @@ export default function HomeScreen() {
         <Stack.Screen name="getStarted" component={GetStartedScreen} />
         <Stack.Screen name="signUp" component={SignUpScreen} />
         <Stack.Screen name="settings" component={SettingsScreen} />
+        <Stack.Screen name="profile" component={ProfileEditScreen} />
       </Stack.Navigator>
   );
 }
