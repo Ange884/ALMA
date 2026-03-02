@@ -102,9 +102,9 @@ export default function ProfileEditScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 40,
-    paddingTop: 20,
+    paddingTop: 5,
     marginHorizontal:20,
+    marginBottom:20,
   },
 
   header: {
@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
   },
 
   avatar: {
-    width: 120,
-    height: 120,
+    width: 70,
+    height: 70,
     borderRadius: 60,
     backgroundColor: "#E0E0E0",
     marginBottom: 10,
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
 
   changePhotoBtn: {
     backgroundColor: "#0A1A12",
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingVertical: 6,
-    borderRadius: 7,
+    borderRadius: 5,
   },
 
   changePhotoText: {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
 
   form: {
-    gap: 12,
+    gap: 8,
   },
 
   label: {
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 30,
+    marginTop: 10,
   },
 
   updateBtn: {

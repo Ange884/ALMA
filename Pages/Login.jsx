@@ -1,19 +1,22 @@
+import { Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold, useFonts } from "@expo-google-fonts/poppins";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
+  Dimensions,
   ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
-  SafeAreaView,
-  Dimensions
+  View
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useFonts, Poppins_400Regular, Poppins_700Bold,Poppins_600SemiBold } from "@expo-google-fonts/poppins";
  const {height,width} = Dimensions.get('window');
 
 export default function GetStartedScreen({navigation}) {
+
+  const [remember, setRemember] = React.useState(false);
+
      const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_700Bold,
@@ -59,11 +62,16 @@ export default function GetStartedScreen({navigation}) {
           <Ionicons name="eye-outline" size={20} color="#555" />
         </View>
 
-        {/* Remember / Forgot */}
-        <View style={styles.row}>
-          <Text style={styles.remember}>☐ Remember me</Text>
-          <Text style={styles.forgot}>Forgot password?</Text>
-        </View>
+        <View style={styles.options}>
+             <View style={styles.remember}>
+               <TouchableOpacity style={[styles.checkbox, remember && styles.checkboxActive]}
+                 onPress={() =>setRemember(!remember)}>
+                   {remember && <Ionicons name="checkmark" size={14} color="#fff" />}
+               </TouchableOpacity>
+               <Text style={styles.optionText}>Remember me</Text>
+             </View>
+             <Text style={styles.link}>Forgot password?</Text>
+           </View>
 
         {/* Button */}
         <TouchableOpacity style={styles.button}
@@ -99,14 +107,62 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#fff",
     padding: 25,
-    height: height * 0.6,
-    
+    paddingTop: 35,
+    height: height * 0.75,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+  },
+
+  
+  options: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 15,
+    justifyContent:"space-between",
+  },
+
+  remember: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+ checkbox: {
+  width: 18,
+  height: 18,
+  borderRadius: 4,
+  borderWidth: 1.5,
+  borderColor: '#024236',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginRight: 6,
+},
+
+checkboxActive: {
+  backgroundColor: '#041411',
+},
+
+
+  optionText: {
+    fontSize: 16,
+    color: '#555',
+    fontFamily: 'Poppins_400Regular',
+  },
+
+  link: {
+    color: '#041411',
+    fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
+  },
+  linklogin: {
+    color: '#045d4d',
+    fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
   },
 
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    fontFamily: 'Poppins_700Bold',
+    fontFamily: 'Poppins_600SemiBold',
     textAlign: "center"
   },
 
@@ -123,7 +179,8 @@ const styles = StyleSheet.create({
   inputBox: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 15,
+    paddingVertical: 4,
+    paddingHorizontal:8,
     borderRadius: 12,
     marginBottom: 15,
     borderColor: "#191818",
@@ -141,12 +198,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 20
-  },
-
-  remember: {
-    color: "#555",
-    fontFamily: 'Poppins_400Regular',
-    fontSize: 17,
   },
 
   forgot: {
@@ -182,5 +233,6 @@ const styles = StyleSheet.create({
     color: "#2f6f4e",
     fontWeight: "bold",
     fontSize: 18,
+    fontFamily:"Poppins_600SemiBold"
   }
 });

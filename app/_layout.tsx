@@ -3,8 +3,12 @@ import { Stack } from "expo-router";
 export default function RootLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      {/* Root stack should render the (tabs) group, not a non-existent index route */}
-      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="index" />
+      <Stack.Screen name="welcome" />
+      <Stack.Screen name="login" />
+      <Stack.Screen name="register" />
+      <Stack.Screen name="settings" />
+      <Stack.Screen name="profile-edit" />
     </Stack>
   );
 }

@@ -114,7 +114,8 @@ export default function SignUpScreen({navigation}) {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 15,
+    marginTop:5,
+    marginBottom:7
   },
 
   remember: {
@@ -161,7 +162,7 @@ checkboxActive: {
     backgroundColor: '#041411',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 0,
   },
 
   buttonText: {
@@ -174,7 +175,7 @@ checkboxActive: {
     textAlign: 'center',
     color: '#555',
     fontSize: 16,
-    marginVertical: 18,
+    marginVertical: 8,
     fontFamily: 'Poppins_400Regular',
   },
 
@@ -197,7 +198,7 @@ checkboxActive: {
 
   footer: {
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: 0,
     fontSize: 18,
     color: '#555',
     fontFamily: 'Poppins_400Regular',
