@@ -6,12 +6,17 @@ const { width, height } = Dimensions.get('window');
 interface LeafBackgroundProps {
     children: React.ReactNode;
     overlayOpacity?: number;
+    source?: any;
 }
 
-export const LeafBackground: React.FC<LeafBackgroundProps> = ({ children, overlayOpacity = 0.4 }) => {
+export const LeafBackground: React.FC<LeafBackgroundProps> = ({
+    children,
+    overlayOpacity = 0.4,
+    source = require('../assets/images/signup.jpg')
+}) => {
     return (
         <ImageBackground
-            source={require('../assets/images/signup.jpg')}
+            source={source}
             style={styles.background}
             resizeMode="cover"
         >

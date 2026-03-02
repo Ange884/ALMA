@@ -109,7 +109,10 @@ const SettingItem = ({ icon, label, type, value, onToggle }: SettingItemProps) =
             />
         )}
         {type === 'dropdown' && (
-            <Ionicons name="chevron-down" size={20} color={Colors.black} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={[styles.settingLabel, { color: Colors.textSecondary, fontSize: 14 }]}>{value}</Text>
+                <Ionicons name="chevron-down" size={20} color={Colors.black} />
+            </View>
         )}
         {type === 'link' && (
             <Ionicons name="chevron-forward" size={20} color={Colors.black} />

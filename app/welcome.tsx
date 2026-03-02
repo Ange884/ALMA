@@ -7,11 +7,11 @@ import { AppButton } from '../components/AppButton';
 
 export default function WelcomeScreen() {
     return (
-        <LeafBackground overlayOpacity={0.6}>
+        <LeafBackground  source={require('../assets/images/Landing-image.jpg')}>
             <View style={styles.container}>
                 <View style={styles.content}>
                     <Image
-                        source={require('../assets/images/splash-icon.png')}
+                        source={require('../assets/images/alma.png')}
                         style={styles.logo}
                         resizeMode="contain"
                     />
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         alignItems: 'center',
-        justifyContent: 'space-between',
         paddingVertical: 60,
     },
     content: {
@@ -60,13 +59,14 @@ const styles = StyleSheet.create({
         ...Typography.body,
         textAlign: 'center',
         lineHeight: 24,
+        marginBottom: 70,
     },
     footer: {
-        width: '100%',
-        paddingHorizontal: Spacing.xl,
+        width: '65%',
+        paddingHorizontal: 20,
     },
     button: {
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        backgroundColor: 'rgba(117, 117, 117, 0.2)',
         borderWidth: 1,
         borderColor: Colors.white,
     },

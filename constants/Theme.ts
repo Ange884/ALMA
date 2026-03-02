@@ -35,9 +35,17 @@ export const Typography = {
         fontSize: 24,
         fontFamily: 'Poppins_600SemiBold',
     },
+    h3: {
+        fontSize: 18,
+        fontFamily: 'Poppins_500Medium',
+    },
     body: {
         fontSize: 16,
         fontFamily: 'Poppins_400Regular',
+    },
+    medium: {
+        fontSize: 16,
+        fontFamily: 'Poppins_500Medium',
     },
     button: {
         fontSize: 18,
